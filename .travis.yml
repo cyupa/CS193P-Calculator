@@ -3,6 +3,8 @@ osx_image: xcode8.2
 xcode_project: Calculator.xcodeproj
 xcode_scheme: Calculator
 xcode_sdk: iphonesimulator10.2
+install:
+  - bundle install
 script:
   - fastlane test
 after_success:
