@@ -1,0 +1,8 @@
+coverage_service: cobertura_xml
+xcodeproj: Calculator.xcodeproj
+scheme: YourXcodeSchemeName
+source_directory: Calculator
+output_directory: reports
+ignore:
+  - CalculatorTests/*
+  - CalculatorUITests/*
