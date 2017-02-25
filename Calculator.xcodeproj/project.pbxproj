@@ -14,6 +14,7 @@
 		D657B9331E5F3D560006ADF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D657B9311E5F3D560006ADF6 /* LaunchScreen.storyboard */; };
 		D657B93E1E5F3D560006ADF6 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D657B93D1E5F3D560006ADF6 /* CalculatorTests.swift */; };
 		D657B9491E5F3D560006ADF6 /* CalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D657B9481E5F3D560006ADF6 /* CalculatorUITests.swift */; };
+		D6834A491E62286500693A7A /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6834A481E62286500693A7A /* CalculatorBrain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		D657B9441E5F3D560006ADF6 /* CalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D657B9481E5F3D560006ADF6 /* CalculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorUITests.swift; sourceTree = "<group>"; };
 		D657B94A1E5F3D560006ADF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D6834A481E62286500693A7A /* CalculatorBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			children = (
 				D657B9281E5F3D560006ADF6 /* AppDelegate.swift */,
 				D657B92A1E5F3D560006ADF6 /* ViewController.swift */,
+				D6834A481E62286500693A7A /* CalculatorBrain.swift */,
 				D657B92C1E5F3D560006ADF6 /* Main.storyboard */,
 				D657B92F1E5F3D560006ADF6 /* Assets.xcassets */,
 				D657B9311E5F3D560006ADF6 /* LaunchScreen.storyboard */,
@@ -197,12 +200,12 @@
 					};
 					D657B9381E5F3D560006ADF6 = {
 						CreatedOnToolsVersion = 8.2.1;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						TestTargetID = D657B9241E5F3D560006ADF6;
 					};
 					D657B9431E5F3D560006ADF6 = {
 						CreatedOnToolsVersion = 8.2.1;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						TestTargetID = D657B9241E5F3D560006ADF6;
 					};
 				};
@@ -259,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6834A491E62286500693A7A /* CalculatorBrain.swift in Sources */,
 				D657B92B1E5F3D560006ADF6 /* ViewController.swift in Sources */,
 				D657B9291E5F3D560006ADF6 /* AppDelegate.swift in Sources */,
 			);
@@ -439,6 +443,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = CalculatorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.applicodo.CalculatorTests;
@@ -453,6 +458,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = CalculatorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.applicodo.CalculatorTests;
@@ -466,6 +472,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = CalculatorUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.applicodo.CalculatorUITests;
@@ -479,6 +486,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = CalculatorUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.applicodo.CalculatorUITests;
