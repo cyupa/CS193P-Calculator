@@ -1,6 +1,6 @@
 coverage_service: cobertura_xml
 xcodeproj: Calculator.xcodeproj
-scheme: YourXcodeSchemeName
+scheme: Calculator
 source_directory: Calculator
 output_directory: reports
 ignore:
