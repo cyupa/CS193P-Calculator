@@ -16,14 +16,31 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var display: UILabel!
 
+    @IBOutlet weak var sequenceLabel: UILabel!
+
     @IBAction func didTouchDigit(_ sender: UIButton) {
         let buttonText = sender.currentTitle!
+        let currentText = display.text!
+
+        if buttonText == "." {
+            if !hasPrecisionDigit {
+                userIsTypping = true
+            } else {
+                return
+            }
+        }
+
         if userIsTypping {
-            let currentText = display.text!
             display.text = currentText + buttonText
         } else {
             display.text = buttonText
             userIsTypping = true
+        }
+    }
+
+    var hasPrecisionDigit: Bool {
+        get {
+            return display.text!.contains(".")
         }
     }
 
@@ -33,6 +50,23 @@ class ViewController: UIViewController {
         }
         set {
             display.text = String(newValue)
+        }
+    }
+
+    var operations: String {
+        get {
+            return sequenceLabel.text!
+        }
+        set {
+            var operationsString = newValue
+            if brain.resultIsPending {
+                operationsString = newValue + "..."
+            } else {
+                if newValue.characters.count > 0 {
+                    operationsString = newValue + " = "
+                }
+            }
+            sequenceLabel.text = operationsString
         }
     }
 
@@ -50,6 +84,8 @@ class ViewController: UIViewController {
         if let result = brain.result {
             displayValue = result
         }
+
+        operations = brain.description
     }
 }
 

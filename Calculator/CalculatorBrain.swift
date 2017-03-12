@@ -14,13 +14,14 @@ func changeSign(operand: Double) -> Double {
 
 struct CalculatorBrain {
 
-    private var accumulator: Double?
+    private var accumulator: (value: Double?, representation: String?)
 
     private enum Operation {
         case constant(Double)
         case unary((Double) -> Double)
         case binary((Double, Double) -> Double)
         case equals
+        case reset
     }
 
     private var pendingBinaryOperation: PendingBinaryOperation?
@@ -30,12 +31,17 @@ struct CalculatorBrain {
         "e" : Operation.constant(M_E),
         "√" : Operation.unary(sqrt),
         "cos" : Operation.unary(cos),
+        "sin" : Operation.unary(sin),
+        "x²" : Operation.unary({ pow($0, 2) }),
+        "x³" : Operation.unary({ pow($0, 3) }),
+        "2ˣ" : Operation.unary({ pow(2, $0) }),
         "±" : Operation.unary({ -$0 }),
         "×" : Operation.binary(*),
         "+" : Operation.binary(+),
         "-" : Operation.binary(-),
         "÷" : Operation.binary(/),
-        "=" : Operation.equals
+        "=" : Operation.equals,
+        "C" : Operation.reset
     ]
 
     private struct PendingBinaryOperation {
@@ -47,40 +53,71 @@ struct CalculatorBrain {
         }
     }
 
+    var resultIsPending: Bool {
+        get {
+            return pendingBinaryOperation != nil
+        }
+    }
+
+    var description: String {
+        get {
+            return accumulator.representation ?? ""
+        }
+    }
 
     mutating func performOperation(_ symbol: String) {
         if let operation = operations[symbol] {
             switch operation {
             case .constant(let value):
-                accumulator = value
+                let currentRepresentation = accumulator.representation ?? ""
+                accumulator = (value, currentRepresentation + "\(symbol) ")
             case .unary(let function):
-                if accumulator != nil {
-                    accumulator = function(accumulator!)
+                let currentRepresentation = accumulator.representation ?? ""
+                if accumulator.value != nil {
+                    if pendingBinaryOperation != nil {
+                        accumulator = (function(accumulator.value!), currentRepresentation.replacingOccurrences(of: "\(accumulator.value!)", with: "\(symbol)(\(accumulator.value!))"))
+                    } else {
+                        accumulator = (function(accumulator.value!), "\(symbol)(\(currentRepresentation)) ")
+                    }
                 }
             case .binary(let function):
-                if accumulator != nil {
-                    pendingBinaryOperation = PendingBinaryOperation(function: function, firstOperand: accumulator!)
-                    accumulator = nil
+                if accumulator.value != nil {
+                    if pendingBinaryOperation != nil {
+                        performPendingBinaryOperation()
+                    }
+                    let currentRepresentation = accumulator.representation ?? ""
+                    pendingBinaryOperation = PendingBinaryOperation(function: function, firstOperand: accumulator.value!)
+                    accumulator = (nil, currentRepresentation + "\(symbol) ")
                 }
             case .equals:
                 performPendingBinaryOperation()
+            case .reset :
+                accumulator = (0, nil)
+                pendingBinaryOperation = nil
             }
         }
     }
 
     private mutating func performPendingBinaryOperation() {
-        if pendingBinaryOperation != nil && accumulator != nil {
-            accumulator = pendingBinaryOperation!.perform(with: accumulator!)
+        if pendingBinaryOperation != nil && accumulator.value != nil {
+            let currentRepresentation = accumulator.representation ?? ""
+            accumulator = (pendingBinaryOperation!.perform(with: accumulator.value!), currentRepresentation)
+            pendingBinaryOperation = nil
         }
     }
 
     mutating func setOperand(_ operand: Double) {
-        accumulator = operand
+        let currentRepresentation = accumulator.representation ?? ""
+        if resultIsPending {
+            accumulator = (operand, currentRepresentation + "\(operand) ")
+        } else {
+            accumulator = (operand, "\(operand) ")
+        }
     }
 
     var result: Double? {
         get {
-            return accumulator
+            return accumulator.value
         }
     }
 
