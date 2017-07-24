@@ -1,4 +1,8 @@
 language: objective-c
+rvm:
+  - 2.2
+  - jruby
+  - 2.1.0
 osx_image: xcode8.2
 xcode_project: Calculator.xcodeproj
 xcode_scheme: Calculator
